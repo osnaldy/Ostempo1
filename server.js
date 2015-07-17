@@ -7,11 +7,16 @@ var mongo = require('mongodb').MongoClient,
 		client.on('connection', function(socket){
 
 			var col = db.collection('messages');
-			sendStatus = function(s) {
+			var sendStatus = function(s) {
 				socket.emit('status', s);
 
 			};
 
+			//emit all messages
+			col.find().limit(100).sort({_id: 1}).toArray(function(err, res) {
+				if(err) throw err;
+				socket.emit('output', res);
+			});
 
 			//wait for input
 			socket.on('input', function(data) {
@@ -24,6 +29,9 @@ var mongo = require('mongodb').MongoClient,
 
 					} else{
 						col.insert({name: name, message: message}, function() {
+
+							//Emit Lastest message to all clients
+							client.emit('output', [data]);
 						
 						sendStatus({
 							message: "Message sent",
