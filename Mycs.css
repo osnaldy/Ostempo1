@@ -1,0 +1,24 @@
+body {
+	background-color: #008080;
+}
+.myre{
+	
+	margin-top: 100px; text-align: center;
+	background-color: white;
+	margin-bottom: 100px;
+	margin-left: 200px;
+	margin-right: 200px;
+	font-weight: bold;
+}
+.head{
+
+	color: #008080;
+}
+ .stylepic {
+
+ 	border-radius: 150px;
+ }
+ .ids{
+
+ 	 color: #00BFFF;
+ }
